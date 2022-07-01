@@ -20,7 +20,6 @@ export class Page {
     initCards(): Card[] {
         const result: Card[] = [];
         const array = this.data.results;
-        console.log(array);
         array.forEach((data: { url: any; }) => {
             console.log(data.url)
             result.push(new Card(this.el, data));

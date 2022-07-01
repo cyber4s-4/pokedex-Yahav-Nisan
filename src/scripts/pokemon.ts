@@ -9,7 +9,6 @@ export class Pokemon {
         this.el = this.createElement();
         this.parentEl = parentEl
         this.data = data
-        // console.log("data : " ,this.data);
     }
 
     createElement() {
