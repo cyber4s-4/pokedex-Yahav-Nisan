@@ -13,7 +13,7 @@ export class Pokemon {
     }
 
     createElement() {
-        const el = document.createElement('div');
+        const el = document.createElement('li');
         el.classList.add('card');
 
         return el;

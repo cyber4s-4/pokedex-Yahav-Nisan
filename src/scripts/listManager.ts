@@ -19,13 +19,11 @@ export class ListManager {
     initCards(): Card[] {
         const result: Card[] = [];
         const array = this.data.results;
-        console.log(array);
         array.forEach((data: { url: any; }) => {
-            console.log(data.url)
             result.push(new Card(this.el, data));
 
         });
-        return result
+        return result;
 
     }
     displayGrid() {
@@ -39,25 +37,6 @@ export class ListManager {
 
     }
 
-    loadPageFromApi(url: string) {
-        const defaultUrl = 'https://pokeapi.co/api/v2/pokemon';
-        if (!url)
-            url = defaultUrl;
-        return new Promise((resolve, reject) => {
-            fetch(url)
-                .then(response => {
-                    response.json()
-                        .then(data => {
-                            // console.log(data);
-                            this.lastPage = data;
-                            // this.pages.push(new Page(this.el, data, this.pages.length));
-                            // console.log(this.pages);
-                            resolve('loaded')
-                        })
-                })
-                .catch(error => reject(error));
-        })
-    }
 
     next() {
         return this.data.next;
