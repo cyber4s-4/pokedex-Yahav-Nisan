@@ -10,10 +10,10 @@ body{
 }
 #box{
   // background-color: white;
-  padding: 10px;
-  width: 90%;
+  // padding: 10px;
+  width: 100%;
   min-height: 500px;
-  margin: 0 auto;
+  // margin: 0 auto;
 }
 #page{
   display: flex;
@@ -28,6 +28,25 @@ body{
   justify-content: center;
   align-items: center;
   flex-direction: column;
+  width: 100%;
+  
+  ul{
+    width: 100%;
+    max-width: 900px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  button{
+    margin: 15px 0;
+    // background-color: red;
+    padding: 15px 10px;
+    border: none;
+    box-shadow: 0 0 8px rgb(95, 93, 93);
+    border-radius: 10px;
+    cursor: pointer;
+  }
 }
 
 .card{

@@ -1,4 +1,3 @@
-import { Card } from "./card";
 import { Pokemon } from "./pokemon";
 
 export class ListManager {
@@ -7,25 +6,19 @@ export class ListManager {
     // cards: Card[];
     parentEl: HTMLElement;
     el: HTMLElement;
+    dataArray: any = [];
     pokemonsArray: Pokemon[];
-    lastPage: any;
+    offset: number;
 
-    constructor(parentEl: HTMLElement, pokemonsArray: Pokemon[]) {
+    constructor(parentEl: HTMLElement, dataArray: any[]) {
         this.el = this.createElement();
         this.parentEl = parentEl;
-        this.pokemonsArray = pokemonsArray;
-        this.lastPage = 1;
+        this.dataArray = dataArray;
+        this.pokemonsArray = [];
+        this.offset = 0;
+        console.log(this.dataArray)
     }
-    initCards(): Card[] {
-        const result: Card[] = [];
-        const array = this.data.results;
-        array.forEach((data: { url: any; }) => {
-            result.push(new Card(this.el, data));
 
-        });
-        return result;
-
-    }
     displayGrid() {
         // this.cards.forEach(card => {
         //     card.render();
@@ -34,7 +27,21 @@ export class ListManager {
     }
 
     loadMore() {
+        let i = 0;
+        while (i < 20) {
+            this.offset++;
+            if (this.offset > this.dataArray.length - 1)
+                break;
+            const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, this.dataArray[this.offset]);
+            this.pokemonsArray.push(newPokemon);
+            newPokemon.render();
+            i++;
+        }
+        // for (i = this.offset; i < this.dataArray.length && i < 20; i++) {
+        //     console.log(this.dataArray[i]);
 
+        // }
+        // this.offset + i
     }
 
 
@@ -45,15 +52,16 @@ export class ListManager {
         const el = document.createElement('div');
         el.setAttribute('id', 'list');
         const ul = document.createElement('ul');
-        const btn = document.createElement('buttom');
+        const btn = document.createElement('button');
         btn.textContent = "Load more Pokémon"
-        ul.innerHTML = 'No Results';
+        // ul.innerHTML = 'No Results';
+        btn.addEventListener('click', () => this.loadMore());
         el.append(ul, btn)
 
         return el;
     }
     render() {
-        this.displayGrid();
+        this.loadMore()
         this.parentEl.append(this.el);
     }
 }
