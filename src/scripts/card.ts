@@ -26,7 +26,6 @@ export class Card {
                 img.src = data.sprites.front_default;
                 const span = document.createElement('span');
                 span.textContent = data.name;
-                console.log(data)
                 this.el.append(img, span);
             })
             .catch()
