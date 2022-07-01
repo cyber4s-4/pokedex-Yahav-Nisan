@@ -64,7 +64,7 @@ export class Manager {
                                 abilities.push(element.ability.name)
                             })
                             const imageUrl = data.sprites.front_default
-                            console.log(imageUrl)
+                            // console.log(imageUrl)
                             const pokedata: PokeData = { id, name, height, weight, types, abilities, imageUrl };
                             result.push(pokedata);
                             localStorage.clear();
@@ -107,7 +107,6 @@ export class Manager {
         if (index < 0)
             return;
         if (index < this.pages.length) {
-            // console.log('page : ', index);
             this.pages[index].render();
         } else {
             this.loadPageFromApi(this.pages[this.pages.length - 1].next());
