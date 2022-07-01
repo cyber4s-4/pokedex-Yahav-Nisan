@@ -1,59 +1,48 @@
-import { Card } from "./card";
 import { Pokemon } from "./pokemon";
 
 export class ListManager {
-    data: any;
-    // index: number;
-    // cards: Card[];
-    parentEl: HTMLElement;
-    el: HTMLElement;
-    pokemonsArray: Pokemon[];
-    lastPage: any;
+    parentEl: HTMLElement;  // parent HTML element
+    el: HTMLElement;    //  component HTML element
+    dataArray: any = [];    //  data of all pokemons - only data
+    pokemonsArray: Pokemon[];   // array of pokemons component
+    offset: number; //  index of last pokemon displayed
 
-    constructor(parentEl: HTMLElement, pokemonsArray: Pokemon[]) {
+    constructor(parentEl: HTMLElement, dataArray: any[]) {
         this.el = this.createElement();
         this.parentEl = parentEl;
-        this.pokemonsArray = pokemonsArray;
-        this.lastPage = 1;
-    }
-    initCards(): Card[] {
-        const result: Card[] = [];
-        const array = this.data.results;
-        array.forEach((data: { url: any; }) => {
-            result.push(new Card(this.el, data));
-
-        });
-        return result;
-
-    }
-    displayGrid() {
-        // this.cards.forEach(card => {
-        //     card.render();
-        // })
-
-    }
-
-    loadMore() {
-
+        this.dataArray = dataArray;
+        this.pokemonsArray = [];
+        this.offset = -1;
     }
 
 
-    next() {
-        return this.data.next;
+    loadMore() {    //  load more 20 pokemons to list
+        let i = 0;
+        while (i < 20) {
+            this.offset++;
+            if (this.offset > this.dataArray.length - 1)
+                break;
+            const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, this.dataArray[this.offset]);
+            this.pokemonsArray.push(newPokemon);
+            newPokemon.render();
+            i++;
+        }
     }
-    createElement() {
+
+    createElement() {   // create componenet element
         const el = document.createElement('div');
         el.setAttribute('id', 'list');
         const ul = document.createElement('ul');
-        const btn = document.createElement('buttom');
+        const btn = document.createElement('button');
         btn.textContent = "Load more Pokémon"
-        ul.innerHTML = 'No Results';
+        btn.addEventListener('click', () => this.loadMore());
         el.append(ul, btn)
 
         return el;
     }
-    render() {
-        this.displayGrid();
+
+    render() { // render the component
+        this.loadMore()
         this.parentEl.append(this.el);
     }
 }

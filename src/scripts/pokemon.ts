@@ -6,31 +6,25 @@ export class Pokemon {
     el: HTMLElement;
 
     constructor(parentEl: HTMLElement, data: any) {
-        this.el = this.createElement();
         this.parentEl = parentEl
         this.data = data
+        this.el = this.createElement();
+
     }
 
     createElement() {
         const el = document.createElement('li');
         el.classList.add('card');
+        console.log(this.data)
+        const img = document.createElement('img');
+        img.src = this.data.imageUrl;
+        const span = document.createElement('span');
+        span.textContent = this.data.name;
+        el.append(img, span);
 
         return el;
     }
     render() {
-        fetch(this.data.url)
-            .then(response => response.json())
-            .then(data => {
-                const img = document.createElement('img');
-                img.src = data.sprites.front_default;
-                const span = document.createElement('span');
-                span.textContent = data.name;
-                console.log(data)
-                this.el.append(img, span);
-            })
-            .catch()
-            .finally()
-
         this.parentEl.append(this.el);
     }
 }
