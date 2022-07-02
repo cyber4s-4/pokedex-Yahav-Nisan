@@ -71,21 +71,21 @@ export class Manager {
             return JSON.parse(array);
     }
 
-
-
-
-
-
-
-
     createElement() {
         const el = document.createElement('div');
         el.setAttribute('id', 'box');
-
+        const input = document.createElement('input');
+        input.setAttribute('type', 'text');
+        input.setAttribute('placeholder', 'Enter Pokemon Name')
+        const btn = document.createElement('button');
+        btn.innerText = 'Search';
+        btn.addEventListener('click', () => this.listManager.renderFilteredList());
+        el.append(input, btn);
         return el;
     }
+
     render() {
-        this.listManager.render();
+        this.listManager.renderFullList();
         this.parentEl.append(this.el);
     }
 }

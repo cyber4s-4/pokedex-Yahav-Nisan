@@ -15,14 +15,12 @@ export class Pokemon {
     createElement() {
         const el = document.createElement('li');
         el.classList.add('card');
-        console.log(this.data)
         const img = document.createElement('img');
         img.src = this.data.imageUrl;
         const span = document.createElement('span');
         span.textContent = this.data.name;
         el.append(img, span);
         el.addEventListener('click', () => {
-            console.log('open new page')
             window.location.href = './pokemon.html?id=' + this.data.id;
         })
 

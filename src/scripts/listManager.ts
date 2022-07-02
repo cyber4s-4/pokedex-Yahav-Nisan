@@ -16,18 +16,20 @@ export class ListManager {
     }
 
 
-    loadMore() {    //  load more 20 pokemons to list
+    loadMore(array: any) {    //  load 20 more pokemons to list
         let i = 0;
         while (i < 20) {
             this.offset++;
-            if (this.offset > this.dataArray.length - 1)
+            if (this.offset > array.length - 1)
                 break;
-            const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, this.dataArray[this.offset]);
+            const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, array[this.offset]);
             this.pokemonsArray.push(newPokemon);
             newPokemon.render();
             i++;
         }
     }
+
+
 
     createElement() {   // create componenet element
         const el = document.createElement('div');
@@ -35,14 +37,37 @@ export class ListManager {
         const ul = document.createElement('ul');
         const btn = document.createElement('button');
         btn.textContent = "Load more Pokémon"
-        btn.addEventListener('click', () => this.loadMore());
+        btn.addEventListener('click', () => this.loadMore(this.dataArray)); //TODO
         el.append(ul, btn)
 
         return el;
     }
 
-    render() { // render the component
-        this.loadMore()
+    renderFullList() { // render the component
+        this.loadMore(this.dataArray)
         this.parentEl.append(this.el);
+    }
+
+    // searching for a pokemon via the search bar
+    renderFilteredList() {
+        this.offset = -1;
+        const ul = document.getElementsByTagName('ul')[0];
+        ul.innerHTML = '';
+        let filteredDataArray: any = [];
+        let inputValue = document.getElementsByTagName('input')[0].value;
+        if (inputValue === '') {
+            this.renderFullList();
+        } else {
+            for (let data of this.dataArray) {
+                if (data.name.includes(inputValue)) {
+                    filteredDataArray.push(data)
+                    const pokemon = new Pokemon(this.el.firstElementChild as HTMLElement, data);
+                    pokemon.render();
+                }
+            }
+            if (filteredDataArray.length === 0) {
+                ul.textContent = 'Not Found Any Pokemon!'
+            }
+        }
     }
 }

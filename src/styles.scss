@@ -1,21 +1,21 @@
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
   text-align: center;
 }
 
-body{
+body {
   background-color: #ddd;
 }
-#box{
+#box {
   // background-color: white;
   // padding: 10px;
   width: 100%;
   min-height: 500px;
   // margin: 0 auto;
 }
-#page{
+#page {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,14 +23,14 @@ body{
   flex-wrap: wrap;
 }
 
-#list{
+#list {
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   width: 100%;
-  
-  ul{
+
+  ul {
     width: 100%;
     max-width: 900px;
     display: flex;
@@ -38,7 +38,7 @@ body{
     justify-content: center;
     align-items: center;
   }
-  button{
+  button {
     margin: 15px 0;
     // background-color: red;
     padding: 15px 10px;
@@ -49,7 +49,7 @@ body{
   }
 }
 
-.card{
+.card {
   max-width: fit-content;
   height: fit-content;
   box-shadow: 0 0 8px black;
@@ -62,16 +62,16 @@ body{
   align-items: center;
   padding: 0 10px;
 
-  img{
+  img {
     width: 180px;
     height: 180px;
   }
 }
-.card:hover{
+.card:hover {
   animation: cardHover linear 0.2s;
 }
 @keyframes cardHover {
-  100%{
+  100% {
     transform: translateY(-7px);
   }
 }
