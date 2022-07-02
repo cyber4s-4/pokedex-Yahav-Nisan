@@ -52,9 +52,9 @@ export class Manager {
                                 abilities.push(element.ability.name)
                             })
                             const imageUrl = data.sprites.front_default
-                            // console.log(imageUrl)
                             const pokedata: PokeData = { id, name, height, weight, types, abilities, imageUrl };
                             result.push(pokedata);
+                            result.sort((a, b) => a.id - b.id);
                             localStorage.clear();
                             localStorage.setItem('pokeDataArray', JSON.stringify(result));
                         })
@@ -64,7 +64,6 @@ export class Manager {
     }
 
     loadData() {
-        //TODO: function that load data from localstorage if exist or from api
         const array = localStorage.getItem('pokeDataArray');
         if (array === null) {
             return this.getPokeData();

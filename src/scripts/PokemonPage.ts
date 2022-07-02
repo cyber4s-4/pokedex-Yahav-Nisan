@@ -14,6 +14,18 @@ export class PokemonPage {
         document.getElementById('weight')!.innerText = this.data.weight + 'lbs';
         document.getElementById('types')!.innerText = this.data.types.toString();
         document.getElementById('abilities')!.innerText = this.data.abilities.toString();
+        document.getElementsByTagName('button')[0].addEventListener('click', () => {
+            if (window.location.search === '?id=1') {
+                window.location.href = '/pokemon.html?id=120'
+            } else
+                window.location.href = '/pokemon.html?id=' + (this.data.id - 1)
+        })
+        document.getElementsByTagName('button')[1].addEventListener('click', () => {
+            if (window.location.search === '?id=120') {
+                window.location.href = '/pokemon.html?id=1'
+            } else
+                window.location.href = '/pokemon.html?id=' + (this.data.id + 1)
+        })
     }
 
 }

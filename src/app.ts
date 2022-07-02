@@ -4,7 +4,6 @@ import { PokemonPage } from "./scripts/PokemonPage";
 const path = window.location.pathname;
 
 window.addEventListener('load', () => {
-  console.log("Let's start")
   const contentDiv = document.getElementById('content') as HTMLElement;
 
   if (path === '/')
@@ -19,12 +18,11 @@ function initMainPage(parenElement: HTMLElement) {
 }
 
 function initPokemonPage() {
-  console.log("test")
   const idParam: number = Number(window.location.search.slice(4));
   let dataArray = localStorage.getItem('pokeDataArray');
   if (dataArray !== null) {
     dataArray = JSON.parse(dataArray);
-    console.log(new PokemonPage(dataArray![idParam]))
+    new PokemonPage(dataArray![idParam - 1])
   }
 }
 
