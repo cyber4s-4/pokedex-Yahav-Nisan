@@ -20,7 +20,7 @@ export class ListManager {
         let i = 0;
         while (i < 20) {
             this.offset++;
-            if (this.offset > array.length - 1)
+            if (this.offset > this.dataArray.length - 1)
                 break;
             const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, array[this.offset]);
             this.pokemonsArray.push(newPokemon);
