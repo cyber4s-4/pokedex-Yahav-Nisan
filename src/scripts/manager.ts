@@ -74,13 +74,16 @@ export class Manager {
     createElement() {
         const el = document.createElement('div');
         el.setAttribute('id', 'box');
+        const searchBar = document.createElement('div');
+        searchBar.id = 'search-bar'
         const input = document.createElement('input');
         input.setAttribute('type', 'text');
         input.setAttribute('placeholder', 'Enter Pokemon Name')
         const btn = document.createElement('button');
         btn.innerText = 'Search';
         btn.addEventListener('click', () => this.listManager.renderFilteredList());
-        el.append(input, btn);
+        searchBar.append(input, btn)
+        el.append(searchBar);
         return el;
     }
 

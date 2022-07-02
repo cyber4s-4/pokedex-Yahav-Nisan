@@ -25,4 +25,3 @@ function initPokemonPage() {
     new PokemonPage(dataArray![idParam - 1])
   }
 }
-
