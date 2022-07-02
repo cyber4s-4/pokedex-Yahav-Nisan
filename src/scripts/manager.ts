@@ -71,7 +71,7 @@ export class Manager {
             return JSON.parse(array);
     }
 
-    createElement() {
+    createElement() { // manager element
         const el = document.createElement('div');
         el.setAttribute('id', 'box');
         const searchBar = document.createElement('div');
