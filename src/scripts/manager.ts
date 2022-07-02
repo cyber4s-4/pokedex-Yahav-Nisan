@@ -15,8 +15,6 @@ export class Manager {
     parentEl: HTMLElement
     el: HTMLElement;
     dataArray: PokeData[] = []// data from api or localstorage - only data
-    // pages: Page[];
-    currentPage: number;
     listManager: ListManager;
     pokemonsArray: Pokemon[]; // pokemon component  array data & ui
 
@@ -27,10 +25,6 @@ export class Manager {
         this.dataArray = this.loadData()
         this.pokemonsArray = [];
         this.listManager = new ListManager(this.el, this.dataArray);
-        // this.pages = [];
-        this.currentPage = -1;
-        // console.log(this.dataArray)
-
     }
 
 
