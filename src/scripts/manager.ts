@@ -80,13 +80,11 @@ export class Manager {
         input.setAttribute('type', 'text');
         input.setAttribute('placeholder', 'Enter Pokemon Name')
         input.addEventListener('input', () => {
-            console.log('change');
             this.listManager.renderFilteredList();
         })
         const btn = document.createElement('button');
         btn.innerText = 'Search';
         btn.addEventListener('click', () => {
-            console.log("clicked")
             this.listManager.renderFilteredList()
         });
         searchBar.append(input, btn)
@@ -94,7 +92,7 @@ export class Manager {
         return el;
     }
 
-    render() {
+    render() { //  display the manager
         this.listManager.renderFullList();
         this.parentEl.append(this.el);
     }
