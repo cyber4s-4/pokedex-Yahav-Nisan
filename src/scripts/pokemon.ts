@@ -23,7 +23,7 @@ export class Pokemon {
         el.append(img, span);
         el.addEventListener('click', () => {
             console.log('open new page')
-            window.location.href = './pokemon.html'
+            window.location.href = './pokemon.html?id=' + this.data.id
         })
 
         return el;

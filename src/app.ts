@@ -1,4 +1,5 @@
 import { Manager } from "./scripts/manager";
+import { PokemonPage } from "./scripts/PokemonPage";
 
 const path = window.location.pathname;
 
@@ -19,5 +20,11 @@ function initMainPage(parenElement: HTMLElement) {
 
 function initPokemonPage() {
   console.log("test")
+  const idParam: number = Number(window.location.search.slice(4));
+  let dataArray = localStorage.getItem('pokeDataArray');
+  if (dataArray !== null) {
+    dataArray = JSON.parse(dataArray);
+    console.log(new PokemonPage(dataArray![idParam]))
+  }
 }
 
