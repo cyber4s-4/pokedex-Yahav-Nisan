@@ -54,7 +54,6 @@ export class ListManager {
         const ul = document.getElementsByTagName('ul')[0];
         ul.innerHTML = '';
         let filteredDataArray: any = [];
-        // const input = document.getElementsByTagName('input')[0];
 
         let inputValue = document.getElementsByTagName('input')[0].value;
         if (inputValue === '') {
