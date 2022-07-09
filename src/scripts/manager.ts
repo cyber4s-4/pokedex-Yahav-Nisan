@@ -30,36 +30,12 @@ export class Manager {
 
 
     getPokeData(): void {
-        const result: PokeData[] = [];
-        fetch('https://pokeapi.co/api/v2/pokemon?limit=120&offset=0')
+        fetch('http://localhost:4000/pokedata')
             .then(async response => {
                 const data = await response.json();
-                const pokArray = await data.results;
-                pokArray.forEach((element: { name: string, url: string }) => {
-                    const name = element.name;
-                    fetch(element.url)
-                        .then(async response => {
-                            const data = await response.json();
-                            const id: number = data.id;
-                            const types: any = [];
-                            data.types.forEach((element: any) => {
-                                types.push(element.type.name)
-                            })
-                            const height = data.height;
-                            const weight = data.weight;
-                            const abilities: string[] = [];
-                            data.abilities.forEach((element: any) => {
-                                abilities.push(element.ability.name)
-                            })
-                            const imageUrl = data.sprites.front_default
-                            const pokedata: PokeData = { id, name, height, weight, types, abilities, imageUrl };
-                            result.push(pokedata);
-                            result.sort((a, b) => a.id - b.id);
-                            localStorage.clear();
-                            localStorage.setItem('pokeDataArray', JSON.stringify(result));
-                        })
-                });
-                return result;
+                localStorage.clear();
+                localStorage.setItem('pokeDataArray', JSON.stringify(data));
+                return data;
             })
     }
 
