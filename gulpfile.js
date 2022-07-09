@@ -33,21 +33,21 @@ gulp.task('index', () => {
     .pipe(gulp.dest('./dist'));
 });
 
-// Browser Sync
-gulp.task('browser-sync', () => {
-  browserSync.init({
-    browser: 'default',
-    port: 4000,
-    server: { baseDir: './dist' }
-  });
-});
+// // Browser Sync
+// gulp.task('browser-sync', () => {
+//   browserSync.init({
+//     browser: 'default',
+//     port: 4000,
+//     server: { baseDir: './dist' }
+//   });
+// });
 
-// Browser Sync live reload
-gulp.task('browser-sync-watch', () => {
-  gulp.watch('./dist/styles.css').on('change', browserSync.reload);
-  gulp.watch('./dist/app.js').on('change', browserSync.reload);
-  gulp.watch('./dist/index.html').on('change', browserSync.reload);
-});
+// // Browser Sync live reload
+// gulp.task('browser-sync-watch', () => {
+//   gulp.watch('./dist/styles.css').on('change', browserSync.reload);
+//   gulp.watch('./dist/app.js').on('change', browserSync.reload);
+//   gulp.watch('./dist/index.html').on('change', browserSync.reload);
+// });
 
 // Watch scss files
 gulp.task('watch-scss', () => {
@@ -73,7 +73,19 @@ gulp.task('tsc', cb => {
 
 // Watch ts files and recompile
 gulp.task('tsc-w', () => {
-  exec('tsc -w');
+  const tsc = exec('tsc -w --preserveWatchOutput --pretty');
+
+  tsc.stdout.on('data', data => console.log(data));
+  tsc.stderr.on('data', data => console.error(data));
+
+  tsc.on('close', code => console.log(`tsc exited with code ${code}`));
+});
+
+// Start express
+gulp.task('express', () => {
+  const tsc = exec('node express.js');
+  tsc.stdout.on('data', data => console.log(data));
+  tsc.stderr.on('data', data => console.error(data));
 });
 
 // Run all together
@@ -84,11 +96,12 @@ gulp.task('default', gulp.series(
   'tsc',
   'build',
   gulp.parallel(
-    'browser-sync',
-    'browser-sync-watch',
+    // 'browser-sync',
+    // 'browser-sync-watch',
     'watch-scss',
     'watch-html',
     'watch-tsc',
     'tsc-w',
+    'express',
   ),
 ));
