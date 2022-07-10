@@ -19,6 +19,10 @@ app.get('/', (req, res) => {
   res.sendFile(path.join(root, 'index.html'));
 });
 
+app.get('/pokemon', (req, res) => {
+  res.sendFile(path.join(root, 'pokemon.html'));
+});
+
 const filePath = path.join(__dirname, "./data.json");
 const readFileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
 

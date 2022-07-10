@@ -21,7 +21,7 @@ export class Pokemon {
         span.textContent = this.data.name;
         el.append(img, span);
         el.addEventListener('click', () => {
-            window.location.href = './pokemon.html?id=' + this.data.id;
+            window.location.href = './pokemon?id=' + this.data.id;
         })
 
         return el;

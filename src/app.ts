@@ -8,7 +8,7 @@ window.addEventListener('load', () => {
 
   if (path === '/')
     initMainPage(contentDiv);
-  else if (path === '/pokemon.html')
+  else if (path === '/pokemon')
     initPokemonPage();
 });
 
