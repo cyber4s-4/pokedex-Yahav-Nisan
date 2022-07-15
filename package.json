@@ -2,7 +2,7 @@
   "name": "gulp_typescript",
   "scripts": {
     "start": "gulp",
-    "express": "node express.js",
+    "express": "node ./src/server/express.js",
     "lint": "eslint ./src --ext .ts",
     "jest": "jest",
     "lint-fix": "eslint ./src --ext .ts --fix"

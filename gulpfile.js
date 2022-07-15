@@ -83,7 +83,7 @@ gulp.task('tsc-w', () => {
 
 // Start express
 gulp.task('express', () => {
-  const tsc = exec('node express.js');
+  const tsc = exec('node ./src/server/express.js');
   tsc.stdout.on('data', data => console.log(data));
   tsc.stderr.on('data', data => console.error(data));
 });
