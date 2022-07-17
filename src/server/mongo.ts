@@ -20,10 +20,12 @@ export async function connect(client: MongoClient) {
 // }
 
 // // @ts-ignore
-// export async function getItems(collection: Collection<Item>) {
-//   // TODO - get the items from mongo (via collection)
-//   return []; // Temporary
-// }
+export async function getItems(collection: Collection<PokeData>) {
+    const cursor = collection.find({});
+    return (await cursor.toArray()).sort((a: PokeData, b: PokeData) => {
+        return a.id - b.id
+    });
+}
 
 // // @ts-ignore
 // export async function clearItems(collection: Collection<Item>) {

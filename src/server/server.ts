@@ -1,10 +1,10 @@
-import fs from 'fs';
+// import fs from 'fs';
 import path from 'path';
 import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 import { Collection } from 'mongodb';
-import { create, connect } from './mongo';
+import { create, connect, getItems as getPokeData } from './mongo';
 import { PokeData } from 'src/client/scripts/manager';
 
 const app: Express = express();
@@ -15,7 +15,6 @@ const root: string = path.join(process.cwd(), 'dist');
 let collection: Collection<PokeData>;
 connect(create()).then(res => {
   collection = res;
-  console.log(collection);
 });
 
 
@@ -57,12 +56,13 @@ app.get('/pokemon', (req, res) => {
   res.sendFile(path.join(root, 'pokemon.html'));
 });
 
-const filePath = path.join(__dirname, "./data.json");
-const readFileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
+// const filePath = path.join(__dirname, "./data.json");
+// const readFileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
 //@ts-ignore
-app.get("/pokedata", (req, res) => {
-  res.status(200).send(readFileData);
+app.get("/pokedata", async (req, res) => {
+  const data = await getPokeData(collection);
+  res.send(data);
 });
 
 const port = process.env.PORT || 4000;
