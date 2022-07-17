@@ -3,7 +3,10 @@
     "target": "es2020",
     "module": "CommonJS",
     "moduleResolution": "node",
-    "lib": ["es2020", "DOM"],
+    "lib": [
+      "es2020",
+      "DOM"
+    ],
     "baseUrl": "./",
     "outDir": "./dist/tsc",
     "noUnusedLocals": true,
@@ -12,6 +15,8 @@
     "forceConsistentCasingInFileNames": true,
     "incremental": true,
     "tsBuildInfoFile": "./dist/cache/tsc.json",
-    "strict": true
+    "skipLibCheck": true,
+    "strict": true,
+    "esModuleInterop": true,
   }
 }
