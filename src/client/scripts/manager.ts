@@ -1,7 +1,7 @@
 import { ListManager } from "./listManager";
 import { Pokemon } from "./pokemon";
 
-interface PokeData {
+export interface PokeData {
     id: number;
     name: string;
     height: number;

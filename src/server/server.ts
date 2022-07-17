@@ -3,16 +3,21 @@ import path from 'path';
 import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
-// import { Collection } from 'mongodb';
-// import { create, connect } from './mongo';
+import { Collection } from 'mongodb';
+import { create, connect } from './mongo';
+import { PokeData } from 'src/client/scripts/manager';
 
 const app: Express = express();
 app.use(cors());
 app.use(json());
 const root: string = path.join(process.cwd(), 'dist');
 // @ts-ignore
-// let collection: Collection<Item>;
-// connect(create()).then(res => collection = res);
+let collection: Collection<PokeData>;
+connect(create()).then(res => {
+  collection = res;
+  console.log(collection);
+});
+
 
 app.use(express.static(root));
 

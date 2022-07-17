@@ -1,18 +1,18 @@
-// import { MongoClient, Db, Collection/*, WithId*/ } from 'mongodb';
+import { MongoClient, Db, Collection/*, WithId*/ } from 'mongodb';
+import { PokeData } from 'src/client/scripts/manager';
 
-// export function create() {
-//   // TODO - Replace with your own mongo url
-//   const uri = "mongodb+srv://test-mongo:PByEK11GMs8c6dEi@cluster0.vs8nc.mongodb.net/?retryWrites=true&w=majority";
-//   const client = new MongoClient(uri);
-//   return client;
-// }
+export function create() {
+    const uri = "mongodb+srv://yahav9:buba2017@cluster0.hae7i1f.mongodb.net/?retryWrites=true&w=majority";
+    const client = new MongoClient(uri);
+    return client;
+}
 
-// export async function connect(client: MongoClient) {
-//   await client.connect();
-//   const db: Db = client.db('bootcamp');
-//   const collection: Collection<Item> = db.collection('shop');
-//   return collection;
-// }
+export async function connect(client: MongoClient) {
+    await client.connect();
+    const db: Db = client.db('Pokedex-Project');
+    const collection: Collection<PokeData> = db.collection('PokeData');
+    return collection;
+}
 
 // // @ts-ignore
 // export async function addItem(name: string, collection: Collection<Item>) {
