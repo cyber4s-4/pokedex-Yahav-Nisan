@@ -21,5 +21,5 @@ async function initPokemonPage() {
   const idParam = window.location.search;
   const response = await fetch('http://localhost:4000/pokedata' + idParam);
   const data = await response.json();
-  new PokemonPage(data[0]);
+  new PokemonPage(data);
 }

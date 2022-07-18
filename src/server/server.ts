@@ -4,7 +4,7 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 import { Collection } from 'mongodb';
-import { create, connect, getPokeData, getDataForPokemonPage } from './mongo';
+import { create, connect, getPokeData, getDataForPokemonPage, getPokemonsViaSearchBar } from './mongo';
 import { PokeData } from 'src/client/scripts/manager';
 
 // let offset: number = 0;
@@ -34,6 +34,9 @@ app.get('/pokemon', (req, res) => {
 app.get('/pokedata', async (req, res) => {
   if (req.query.id !== undefined) {
     const data = await getDataForPokemonPage(collection, Number(req.query.id));
+    res.send(data);
+  } else if (req.query.name !== undefined) {
+    const data = await getPokemonsViaSearchBar(collection, req.query.name.toString(), Number(req.query.offset));
     res.send(data);
   } else {
     const data = await getPokeData(collection, Number(req.query.offset));

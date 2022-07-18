@@ -37,9 +37,9 @@ export class Manager {
         // });
         const btn = document.createElement('button');
         btn.innerText = 'Search';
-        // btn.addEventListener('click', () => {
-        //     this.listManager.renderFilteredList();
-        // });
+        btn.addEventListener('click', () => {
+            this.listManager.renderFilteredList();
+        });
         searchBar.append(input, btn);
         el.append(searchBar);
         return el;

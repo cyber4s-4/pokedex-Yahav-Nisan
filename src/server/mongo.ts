@@ -1,4 +1,4 @@
-import { MongoClient, Db, Collection/* , WithId*/ } from 'mongodb';
+import { MongoClient, Db, Collection } from 'mongodb';
 import { PokeData } from 'src/client/scripts/manager';
 
 export function create() {
@@ -24,8 +24,15 @@ export async function getPokeData(collection: Collection<PokeData>, offset: numb
 }
 
 export async function getDataForPokemonPage(collection: Collection<PokeData>, id: number) {
-    const cursor = collection.find({ 'id': id })
+    const data = collection.findOne({ 'id': id });
+    return await data;
+}
+
+export async function getPokemonsViaSearchBar(collection: Collection<PokeData>, str: string, offset: number) {
+    const cursor = collection.find({ 'name': { $regex: str } })
+        .sort({ id: 1 })
+        .skip(offset)
+        .limit(20)
         .toArray();
-    // console.log(cursor)
     return await cursor;
 }

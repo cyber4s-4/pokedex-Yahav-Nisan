@@ -10,21 +10,21 @@ export class ListManager {
         this.el = this.createElement();
         this.parentEl = parentEl;
         this.pokemonsArray = [];
-        this.offset = -20;
+        this.offset = 0;
     }
 
 
     async loadMore() {    //  load 20 more pokemons to list
-        this.offset += 20;
         const response = await fetch('http://localhost:4000/pokedata?offset=' + this.offset);
         const data = await response.json();
         let i = 0;
-        while (i < 20) {
+        while (i < 20 && data !== undefined) {
             const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, await data[i]);
             this.pokemonsArray.push(newPokemon);
             newPokemon.render();
             i++;
         }
+        this.offset += 20;
     }
 
     createElement() {   // create componenet element
@@ -33,38 +33,39 @@ export class ListManager {
         const ul = document.createElement('ul');
         const btn = document.createElement('button');
         btn.textContent = "Load more Pokémon"
-        btn.addEventListener('click', () => this.loadMore()); //TODO
+        btn.addEventListener('click', () => this.loadMore());
         el.append(ul, btn)
 
         return el;
     }
 
     renderFullList() { // render the component
+        this.offset = 0;
         this.loadMore()
         this.parentEl.append(this.el);
     }
 
     // searching for a pokemon via the search bar
-    // renderFilteredList() {
-    //     this.offset = -1;
-    //     const ul = document.getElementsByTagName('ul')[0];
-    //     ul.innerHTML = '';
-    //     let filteredDataArray: any = [];
-
-    //     let inputValue = document.getElementsByTagName('input')[0].value;
-    //     if (inputValue === '') {
-    //         this.renderFullList();
-    //     } else {
-    //         for (let data of this.dataArray) {
-    //             if (data.name.includes(inputValue)) {
-    //                 filteredDataArray.push(data)
-    //                 const pokemon = new Pokemon(this.el.firstElementChild as HTMLElement, data);
-    //                 pokemon.render();
-    //             }
-    //         }
-    //         if (filteredDataArray.length === 0) {
-    //             ul.textContent = 'Not Found Any Pokemon!'
-    //         }
-    //     }
-    // }
+    async renderFilteredList() {
+        const ul = document.getElementsByTagName('ul')[0];
+        ul.innerHTML = '';
+        let inputValue = document.getElementsByTagName('input')[0].value;
+        if (inputValue === '') {
+            this.renderFullList();
+        } else {
+            this.offset = 0;
+            const response = await fetch('http://localhost:4000/pokedata?offset=' + this.offset + '&name=' + inputValue);
+            const data = await response.json();
+            let i = 0;
+            while (i < 20 && await data[i] !== undefined) {
+                const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, await data[i]);
+                this.pokemonsArray.push(newPokemon);
+                newPokemon.render();
+                i++;
+            }
+            if (await data.length === 0) {
+                ul.textContent = 'Did Not Found Any Pokemon!'
+            }
+        }
+    }
 }
