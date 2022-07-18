@@ -12,8 +12,9 @@ window.addEventListener('load', () => {
     initPokemonPage();
 });
 
-function initMainPage(parenElement: HTMLElement) {
-  const manager = new Manager(parenElement);
+async function initMainPage(parenElement: HTMLElement) {
+  const data = await getPokeData();
+  const manager = new Manager(parenElement, data);
   manager.render();
 }
 
@@ -24,4 +25,10 @@ function initPokemonPage() {
     dataArray = JSON.parse(dataArray);
     new PokemonPage(dataArray![idParam - 1])
   }
+}
+
+async function getPokeData() {
+  const response = await fetch('http://localhost:4000/pokedata');
+  const data = await response.json();
+  return await data;
 }

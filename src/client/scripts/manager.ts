@@ -14,37 +14,17 @@ export interface PokeData {
 export class Manager {
     parentEl: HTMLElement
     el: HTMLElement;
-    dataArray: PokeData[] = []// data from api or localstorage - only data
+    dataArray: PokeData[] = []// data from api - only data
     listManager: ListManager;
     pokemonsArray: Pokemon[]; // pokemon component  array data & ui
 
 
-    constructor(parentEl: HTMLElement) {
+    constructor(parentEl: HTMLElement, dataArray: PokeData[]) {
         this.parentEl = parentEl;
         this.el = this.createElement();
-        this.dataArray = this.loadData()
+        this.dataArray = dataArray
         this.pokemonsArray = [];
         this.listManager = new ListManager(this.el, this.dataArray);
-    }
-
-
-
-    getPokeData(): void {
-        fetch('http://localhost:4000/pokedata')
-            .then(async response => {
-                const data = await response.json();
-                localStorage.clear();
-                localStorage.setItem('pokeDataArray', JSON.stringify(data));
-                return data;
-            })
-    }
-
-    loadData() {
-        const array = localStorage.getItem('pokeDataArray');
-        if (array === null) {
-            return this.getPokeData();
-        } else
-            return JSON.parse(array);
     }
 
     createElement() { // manager element

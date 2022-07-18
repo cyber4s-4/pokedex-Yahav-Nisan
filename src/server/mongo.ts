@@ -14,20 +14,11 @@ export async function connect(client: MongoClient) {
     return collection;
 }
 
-// // @ts-ignore
-// export async function addItem(name: string, collection: Collection<Item>) {
-//   // TODO - add the item to mongo (via collection)
-// }
-
-// // @ts-ignore
-export async function getItems(collection: Collection<PokeData>) {
-    const cursor = collection.find({});
-    return (await cursor.toArray()).sort((a: PokeData, b: PokeData) => {
-        return a.id - b.id
-    });
+export async function getPokeData(collection: Collection<PokeData>) {
+    const cursor = collection.find({})
+        .sort({ id: 1 })
+        .limit(20)
+        .toArray();
+    return await cursor;
 }
 
-// // @ts-ignore
-// export async function clearItems(collection: Collection<Item>) {
-//   // TODO - delete all the items from mongo (via collection)
-// }

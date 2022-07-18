@@ -4,9 +4,10 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 import { Collection } from 'mongodb';
-import { create, connect, getItems as getPokeData } from './mongo';
+import { create, connect, getPokeData } from './mongo';
 import { PokeData } from 'src/client/scripts/manager';
 
+// let offset: number = 0;
 const app: Express = express();
 app.use(cors());
 app.use(json());
@@ -16,7 +17,6 @@ let collection: Collection<PokeData>;
 connect(create()).then(res => {
   collection = res;
 });
-
 
 app.use(express.static(root));
 
@@ -55,9 +55,6 @@ app.get('/', (req, res) => {
 app.get('/pokemon', (req, res) => {
   res.sendFile(path.join(root, 'pokemon.html'));
 });
-
-// const filePath = path.join(__dirname, "./data.json");
-// const readFileData = JSON.parse(fs.readFileSync(filePath, "utf8"));
 
 //@ts-ignore
 app.get("/pokedata", async (req, res) => {
