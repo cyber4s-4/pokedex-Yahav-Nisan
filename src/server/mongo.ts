@@ -22,3 +22,10 @@ export async function getPokeData(collection: Collection<PokeData>, offset: numb
         .toArray();
     return await cursor;
 }
+
+export async function getDataForPokemonPage(collection: Collection<PokeData>, id: number) {
+    const cursor = collection.find({ 'id': id })
+        .toArray();
+    // console.log(cursor)
+    return await cursor;
+}

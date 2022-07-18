@@ -4,7 +4,7 @@ import express, { Express } from 'express';
 import cors from 'cors';
 import { json } from 'body-parser';
 import { Collection } from 'mongodb';
-import { create, connect, getPokeData } from './mongo';
+import { create, connect, getPokeData, getDataForPokemonPage } from './mongo';
 import { PokeData } from 'src/client/scripts/manager';
 
 // let offset: number = 0;
@@ -32,8 +32,13 @@ app.get('/pokemon', (req, res) => {
 
 // @ts-ignore
 app.get('/pokedata', async (req, res) => {
-  const data = await getPokeData(collection, Number(req.query.offset));
-  res.send(data);
+  if (req.query.id !== undefined) {
+    const data = await getDataForPokemonPage(collection, Number(req.query.id));
+    res.send(data);
+  } else {
+    const data = await getPokeData(collection, Number(req.query.offset));
+    res.send(data);
+  }
 });
 
 const port = process.env.PORT || 4000;

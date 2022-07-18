@@ -17,11 +17,9 @@ async function initMainPage(parenElement: HTMLElement) {
   manager.render();
 }
 
-function initPokemonPage() {
-  const idParam = Number(window.location.search.slice(4));
-  let dataArray = localStorage.getItem('pokeDataArray');
-  if (dataArray !== null) {
-    dataArray = JSON.parse(dataArray);
-    new PokemonPage(dataArray![idParam - 1]);
-  }
+async function initPokemonPage() {
+  const idParam = window.location.search;
+  const response = await fetch('http://localhost:4000/pokedata' + idParam);
+  const data = await response.json();
+  new PokemonPage(data[0]);
 }
