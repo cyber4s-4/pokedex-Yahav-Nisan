@@ -20,45 +20,19 @@ connect(create()).then(res => {
 
 app.use(express.static(root));
 
-// // @ts-ignore
-// app.post('/add', (req, res) => {
-//   console.log("Add " + req.body.name);
-//   // TODO - add the requested item to mongo
-//   res.end(); // Temporary
-// });
-
-// // @ts-ignore
-// app.get('/get', (req, res) => {
-//   console.log("Get");
-//   // TODO - get items from mongo and return them via res
-//   res.json([]); // Temporary
-// });
-
-// // @ts-ignore
-// app.get('/clear', (req, res) => {
-//   console.log("Clear");
-//   // TODO - delete everything stored in mongo
-//   res.end(); // Temporary
-// });
-
-// // @ts-ignore
-// app.get('*', (req, res) => {
-//   res.sendFile(path.join(root, 'index.html'));
-// });
-
-//@ts-ignore
+// @ts-ignore
 app.get('/', (req, res) => {
   res.sendFile(path.join(root, 'index.html'));
 });
 
-//@ts-ignore
+// @ts-ignore
 app.get('/pokemon', (req, res) => {
   res.sendFile(path.join(root, 'pokemon.html'));
 });
 
-//@ts-ignore
-app.get("/pokedata", async (req, res) => {
-  const data = await getPokeData(collection);
+// @ts-ignore
+app.get('/pokedata', async (req, res) => {
+  const data = await getPokeData(collection, Number(req.query.offset));
   res.send(data);
 });
 

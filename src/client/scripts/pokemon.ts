@@ -1,13 +1,12 @@
 
-
 export class Pokemon {
     data: any;
-    parentEl: HTMLElement
+    parentEl: HTMLElement;
     el: HTMLElement;
 
     constructor(parentEl: HTMLElement, data: any) {
-        this.parentEl = parentEl
-        this.data = data
+        this.parentEl = parentEl;
+        this.data = data;
         this.el = this.createElement();
 
     }
@@ -22,7 +21,7 @@ export class Pokemon {
         el.append(img, span);
         el.addEventListener('click', () => {
             window.location.href = './pokemon?id=' + this.data.id;
-        })
+        });
 
         return el;
     }

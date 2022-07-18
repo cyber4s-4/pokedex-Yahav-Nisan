@@ -6,7 +6,7 @@ export class PokemonPage {
         this.render();
     }
 
-    //render a specific pokemon page
+    // render a specific pokemon page
     render() {
         document.getElementById('name')!.innerText = this.data.name;
         document.getElementById('id')!.innerText = '#' + this.data.id;
@@ -20,13 +20,13 @@ export class PokemonPage {
                 window.location.href = '/pokemon?id=120';
             } else
                 window.location.href = '/pokemon?id=' + (this.data.id - 1);
-        })
+        });
         document.getElementsByTagName('button')[1].addEventListener('click', () => {
             if (window.location.search === '?id=120') {
                 window.location.href = '/pokemon?id=1';
             } else
                 window.location.href = '/pokemon?id=' + (this.data.id + 1);
-        })
+        });
     }
 
 }
