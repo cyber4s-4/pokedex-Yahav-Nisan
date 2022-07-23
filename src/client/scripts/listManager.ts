@@ -32,7 +32,7 @@ export class ListManager {
         el.setAttribute('id', 'list');
         const ul = document.createElement('ul');
         const btn = document.createElement('button');
-        btn.textContent = "Load more Pokémon"
+        btn.textContent = "Load more Pokémons"
         btn.addEventListener('click', () => this.loadMore());
         el.append(ul, btn)
 

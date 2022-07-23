@@ -32,9 +32,6 @@ export class Manager {
         const input = document.createElement('input');
         input.setAttribute('type', 'text');
         input.setAttribute('placeholder', 'Enter Pokemon Name');
-        // input.addEventListener('input', () => {
-        //     this.listManager.renderFilteredList();
-        // });
         const btn = document.createElement('button');
         btn.innerText = 'Search';
         btn.addEventListener('click', () => {
