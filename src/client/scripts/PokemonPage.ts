@@ -17,12 +17,12 @@ export class PokemonPage {
         document.getElementById('abilities')!.innerText = this.data.abilities.toString();
         document.getElementsByTagName('button')[0].addEventListener('click', () => {
             if (window.location.search === '?id=1') {
-                window.location.href = '/pokemon?id=120';
+                window.location.href = '/pokemon?id=800';
             } else
                 window.location.href = '/pokemon?id=' + (this.data.id - 1);
         });
         document.getElementsByTagName('button')[1].addEventListener('click', () => {
-            if (window.location.search === '?id=120') {
+            if (window.location.search === '?id=800') {
                 window.location.href = '/pokemon?id=1';
             } else
                 window.location.href = '/pokemon?id=' + (this.data.id + 1);
