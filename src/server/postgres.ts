@@ -1,9 +1,11 @@
 const { Pool } = require('pg');
+const dotenv = require('dotenv');
+dotenv.config();
+console.log("connection url = ", process.env.DATABASE_URL);
 
 const pool = new Pool({
     connectionString:
-        process.env.DATABASE_URL ||
-        'postgres://animunfopwzyfs:14b4975716ce739fb342dbc235d2924ac2f6638a1b658f48c15ad727b72492c1@ec2-52-204-157-26.compute-1.amazonaws.com:5432/d1djfoalkakaid',
+        process.env.DATABASE_URL,
     ssl: {
         rejectUnauthorized: false,
     },
