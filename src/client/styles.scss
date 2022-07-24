@@ -42,13 +42,22 @@
         font-size: 15px;
       }
 
-      button {
+      #searchButton {
         width: 50px;
         height: 30px;
         background-color: rgb(79, 158, 184);
         cursor: pointer;
         border-top-right-radius: 5px;
         border-bottom-right-radius: 5px;
+      }
+
+      #clearButton {
+        width: 50px;
+        height: 30px;
+        background-color: rgb(223, 178, 80);
+        cursor: pointer;
+        border-radius: 5px;
+        margin-left: 2px;
       }
     }
 

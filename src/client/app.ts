@@ -13,6 +13,7 @@ window.addEventListener('load', () => {
 });
 
 async function initMainPage(parenElement: HTMLElement) {
+    // location.href = '/';
     const manager = new Manager(parenElement);
     manager.render();
 }

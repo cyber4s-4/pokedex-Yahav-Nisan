@@ -14,15 +14,35 @@ export class ListManager {
     }
 
     async loadMore() { //  load 20 more pokemons to list
-        const response = await fetch('/pokedata?offset=' + this.offset);
-        const data = await response.json();
-        let i = 0;
-        while (i < 20 && data !== undefined) {
-            const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, await data[i]);
-            this.pokemonsArray.push(newPokemon);
-            newPokemon.render();
-            i++;
+        let response;
+        if (location.search.includes('name')) {
+            response = await fetch(`/pokedata${location.search}&offset=${this.offset}`);
+            response.json()
+                .then(async (data) => {
+                    let i = 0;
+                    while (i < 20 && data !== undefined) {
+                        const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, await data[i]);
+                        this.pokemonsArray.push(newPokemon);
+                        newPokemon.render();
+                        i++;
+                    }
+                })
+                .catch((e: Error) => console.log(e));
+        } else {
+            response = await fetch('/pokedata?offset=' + this.offset);
+            response.json()
+                .then(async (data) => {
+                    let i = 0;
+                    while (i < 20 && data !== undefined) {
+                        const newPokemon = new Pokemon(this.el.firstElementChild as HTMLElement, await data[i]);
+                        this.pokemonsArray.push(newPokemon);
+                        newPokemon.render();
+                        i++;
+                    }
+                })
+                .catch((e: Error) => console.log(e));
         }
+
         this.offset += 20;
     }
 
@@ -46,9 +66,10 @@ export class ListManager {
 
     // searching for a pokemon via the search bar
     async renderFilteredList() {
+        const inputValue = document.getElementsByTagName('input')[0].value;
+        location.search = `?name=${inputValue}`
         const ul = document.getElementsByTagName('ul')[0];
         ul.innerHTML = '';
-        const inputValue = document.getElementsByTagName('input')[0].value;
         if (inputValue === '') {
             this.renderFullList();
         } else {
@@ -61,6 +82,7 @@ export class ListManager {
                 this.pokemonsArray.push(newPokemon);
                 newPokemon.render();
                 i++;
+                this.offset++;
             }
             if (await data.length === 0) {
                 ul.textContent = 'Did Not Found Any Pokemon!';

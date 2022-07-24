@@ -32,12 +32,19 @@ export class Manager {
         const input = document.createElement('input');
         input.setAttribute('type', 'text');
         input.setAttribute('placeholder', 'Enter Pokemon Name');
-        const btn = document.createElement('button');
-        btn.innerText = 'Search';
-        btn.addEventListener('click', () => {
+        const searchButton = document.createElement('button');
+        searchButton.innerText = 'Search';
+        searchButton.id = 'searchButton';
+        searchButton.addEventListener('click', () => {
             this.listManager.renderFilteredList();
         });
-        searchBar.append(input, btn);
+        const clearButton = document.createElement('button');
+        clearButton.innerText = 'Clear';
+        clearButton.id = 'clearButton';
+        clearButton.addEventListener('click', () => {
+            location.href = '/'
+        });
+        searchBar.append(input, searchButton, clearButton);
         el.append(searchBar);
         return el;
     }
